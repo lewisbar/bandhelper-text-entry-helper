@@ -36,6 +36,24 @@ extension String {
         // TODO
         var newText = self
         
+        // Paragraph
+        newText = "<p>" + newText + "</p>"
+        
+        // Line breaks
+        newText = newText.replacingOccurrences(of: "\n", with: "<br />")
+        
+        // Pre-Chorus orange
+        newText = newText.replacingOccurrences(of: "PC: ", with: "PC: <span style=\"color: #f29137;\">")
+        
+        // Chorus yellow
+        newText = newText.replacingOccurrences(of: "Ch: ", with: "Ch: <span style=\"color: #fccb13;\">")
+        
+        // Bridge green
+        newText = newText.replacingOccurrences(of: "Br: ", with: "Br: <span style=\"color: #91c34e;\">")
+        
+        // Span ending
+        newText = newText.replacingOccurrences(of: "::", with: "</span>")
+        
         // Gray
         let grayItems = ["Ch:", "Br:", "PC:", "In:",
                          "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.",
@@ -44,12 +62,6 @@ extension String {
         for item in grayItems {
             newText = newText.replacingOccurrences(of: item, with: "<span style=\"color: #999999;\">\(item)</span>")
         }
-        
-        // Line breaks
-        newText = newText.replacingOccurrences(of: "\n", with: "<br />")
-        
-        // Paragraph
-        newText = "<p>" + newText + "</p>"
         
         return newText
     }
