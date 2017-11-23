@@ -36,12 +36,17 @@ extension String {
         // TODO
         var newText = self
         
-        // Make numbers gray
-        for number in 1...9 {
-            newText = newText.replacingOccurrences(of: "\(number).", with: "<span style=\"color: #999999;\">\(number).</span>")
-            newText = newText.replacingOccurrences(of: "\(number)x", with: "<span style=\"color: #999999;\">\(number)x</span>")
-            newText = newText.replacingOccurrences(of: "||\(number)", with: "<span style=\"color: #999999;\">||\(number)</span>")
+        // Gray
+        let grayItems = ["Ch:", "Br:", "PC:", "In:",
+                         "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.",
+                         "(1x)", "(2x)", "(3x)", "(4x)", "(5x)", "(6x)", "(7x)", "(8x)", "(9x)", "(10x)",
+                         "||1x", "||2x", "||3x", "||4x", "||5x", "||6x", "||7x", "||8x", "||9x", "||10x"]
+        for item in grayItems {
+            newText = newText.replacingOccurrences(of: item, with: "<span style=\"color: #999999;\">\(item)</span>")
         }
+        
+        // Paragraph
+        newText = "<p>" + newText + "</p>"
         
         return newText
     }
