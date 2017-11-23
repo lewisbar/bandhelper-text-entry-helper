@@ -45,6 +45,9 @@ extension String {
             newText = newText.replacingOccurrences(of: item, with: "<span style=\"color: #999999;\">\(item)</span>")
         }
         
+        // Line breaks
+        newText = newText.replacingOccurrences(of: "\n", with: "<br />")
+        
         // Paragraph
         newText = "<p>" + newText + "</p>"
         
