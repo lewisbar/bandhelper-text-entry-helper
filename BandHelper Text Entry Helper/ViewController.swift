@@ -33,7 +33,13 @@ class ViewController: NSViewController {
 
 extension String {
     var bandHelperHTML: String {
-        // TODO
+        let orangeSpan = "<span style=\"color: #f29137;\">"
+        let yellowSpan = "<span style=\"color: #fccb13;\">"
+        let greenSpan = "<span style=\"color: #91c34e;\">"
+        let graySpan = "<span style=\"color: #999999;\">"
+        let redSpan = "<span style=\"color: #bb2833;\">"
+        let spanEnd = "</span>"
+        
         var newText = self
         
         // Paragraph
@@ -43,19 +49,59 @@ extension String {
         newText = newText.replacingOccurrences(of: "\n", with: "<br />")
         
         // Pre-Chorus orange
-        newText = newText.replacingOccurrences(of: "PC: ", with: "PC: <span style=\"color: #f29137;\">")
+        newText = newText.replacingOccurrences(of: "PC: ", with: "PC: " + orangeSpan)
+        newText = newText.replacingOccurrences(of: "PC1: ", with: "PC1: " + orangeSpan)
+        newText = newText.replacingOccurrences(of: "PC2: ", with: "PC2: " + orangeSpan)
         
         // Chorus yellow
-        newText = newText.replacingOccurrences(of: "Ch: ", with: "Ch: <span style=\"color: #fccb13;\">")
+        newText = newText.replacingOccurrences(of: "Ch: ", with: "Ch: " + yellowSpan)
+        newText = newText.replacingOccurrences(of: "Ch1: ", with: "Ch1: " + yellowSpan)
+        newText = newText.replacingOccurrences(of: "Ch2: ", with: "Ch2: " + yellowSpan)
+        newText = newText.replacingOccurrences(of: "Ch3: ", with: "Ch3: " + yellowSpan)
         
         // Bridge green
-        newText = newText.replacingOccurrences(of: "Br: ", with: "Br: <span style=\"color: #91c34e;\">")
+        newText = newText.replacingOccurrences(of: "Br: ", with: "Br: " + greenSpan)
+        newText = newText.replacingOccurrences(of: "Br1: ", with: "Br1: " + greenSpan)
+        newText = newText.replacingOccurrences(of: "Br2: ", with: "Br2: " + greenSpan)
+
+        // Explicit color signs
+        newText = newText.replacingOccurrences(of: "€o", with: orangeSpan)
+        newText = newText.replacingOccurrences(of: "€y", with: yellowSpan)
+        newText = newText.replacingOccurrences(of: "€g", with: greenSpan)
         
         // Span ending
-        newText = newText.replacingOccurrences(of: "::", with: "</span>")
+        newText = newText.replacingOccurrences(of: "::", with: spanEnd)
         
+        // Capo red
+        for fret in 1...12 {
+            newText = newText.replacingOccurrences(of: "Capo \(fret)", with: redSpan + "Capo \(fret)" + spanEnd)
+        }
+        
+        // Same chords for multiple parts in the chord field
+        newText = newText.replacingOccurrences(of: "/PC: ", with: "/" + orangeSpan + "PC" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/PC1: ", with: "/" + orangeSpan + "PC1" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/PC2: ", with: "/" + orangeSpan + "PC2" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Ch: ", with: "/" + yellowSpan + "Ch" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Ch1: ", with: "/" + yellowSpan + "Ch1" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Ch2: ", with: "/" + yellowSpan + "Ch2" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Ch3: ", with: "/" + yellowSpan + "Ch3" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Br: ", with: "/" + greenSpan + "Br" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Br1: ", with: "/" + greenSpan + "Br1" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Br2: ", with: "/" + greenSpan + "Br2" + spanEnd + ":")
+        
+        newText = newText.replacingOccurrences(of: "PC/", with: orangeSpan + "PC" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "PC1/", with: orangeSpan + "PC1" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "PC2/", with: orangeSpan + "PC2" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Ch/", with: yellowSpan + "Ch" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Ch1/", with: yellowSpan + "Ch1" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Ch2/", with: yellowSpan + "Ch2" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Ch3/", with: yellowSpan + "Ch3" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Br/", with: greenSpan + "Br" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Br1/", with: greenSpan + "Br1" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Br2/", with: greenSpan + "Br2" + spanEnd + "/")
+            
         // Gray
-        let grayItems = ["Ch:", "Br:", "PC:", "In:",
+        let grayItems = ["Ve:", "Ch:", "Ch1:", "Ch2:", "Ch3:", "Br:", "Br1:", "Br2:", "PC:", "PC1:", "PC2:", "In:",
                          "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.",
                          "(1x)", "(2x)", "(3x)", "(4x)", "(5x)", "(6x)", "(7x)", "(8x)", "(9x)", "(10x)",
                          "||1x", "||2x", "||3x", "||4x", "||5x", "||6x", "||7x", "||8x", "||9x", "||10x"]
