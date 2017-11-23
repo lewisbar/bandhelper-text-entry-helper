@@ -59,10 +59,11 @@ extension String {
         newText = newText.replacingOccurrences(of: "Ch2: ", with: "Ch2: " + yellowSpan)
         newText = newText.replacingOccurrences(of: "Ch3: ", with: "Ch3: " + yellowSpan)
         
-        // Bridge green
+        // Bridge/Coda green
         newText = newText.replacingOccurrences(of: "Br: ", with: "Br: " + greenSpan)
         newText = newText.replacingOccurrences(of: "Br1: ", with: "Br1: " + greenSpan)
         newText = newText.replacingOccurrences(of: "Br2: ", with: "Br2: " + greenSpan)
+        newText = newText.replacingOccurrences(of: "Co: ", with: "Co: " + greenSpan)
 
         // Explicit color signs
         newText = newText.replacingOccurrences(of: "€o", with: orangeSpan)
@@ -77,6 +78,10 @@ extension String {
             newText = newText.replacingOccurrences(of: "Capo \(fret)", with: redSpan + "Capo \(fret)" + spanEnd)
         }
         
+        // Rehearsal marks
+        newText = newText.replacingOccurrences(of: "(", with: graySpan + "(")
+        newText = newText.replacingOccurrences(of: ")", with: ")" + spanEnd)
+        
         // Same chords for multiple parts in the chord field
         newText = newText.replacingOccurrences(of: "/PC: ", with: "/" + orangeSpan + "PC" + spanEnd + ":")
         newText = newText.replacingOccurrences(of: "/PC1: ", with: "/" + orangeSpan + "PC1" + spanEnd + ":")
@@ -88,6 +93,7 @@ extension String {
         newText = newText.replacingOccurrences(of: "/Br: ", with: "/" + greenSpan + "Br" + spanEnd + ":")
         newText = newText.replacingOccurrences(of: "/Br1: ", with: "/" + greenSpan + "Br1" + spanEnd + ":")
         newText = newText.replacingOccurrences(of: "/Br2: ", with: "/" + greenSpan + "Br2" + spanEnd + ":")
+        newText = newText.replacingOccurrences(of: "/Co: ", with: "/" + greenSpan + "Co" + spanEnd + ":")
         
         newText = newText.replacingOccurrences(of: "PC/", with: orangeSpan + "PC" + spanEnd + "/")
         newText = newText.replacingOccurrences(of: "PC1/", with: orangeSpan + "PC1" + spanEnd + "/")
@@ -99,14 +105,15 @@ extension String {
         newText = newText.replacingOccurrences(of: "Br/", with: greenSpan + "Br" + spanEnd + "/")
         newText = newText.replacingOccurrences(of: "Br1/", with: greenSpan + "Br1" + spanEnd + "/")
         newText = newText.replacingOccurrences(of: "Br2/", with: greenSpan + "Br2" + spanEnd + "/")
+        newText = newText.replacingOccurrences(of: "Co/", with: greenSpan + "Co" + spanEnd + "/")
             
         // Gray
-        let grayItems = ["Ve:", "Ch:", "Ch1:", "Ch2:", "Ch3:", "Br:", "Br1:", "Br2:", "PC:", "PC1:", "PC2:", "In:",
+        let grayItems = ["Ve:", "Ch:", "Ch1:", "Ch2:", "Ch3:", "Br:", "Br1:", "Br2:", "PC:", "PC1:", "PC2:", "In:", "Co:",
                          "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.",
                          "(1x)", "(2x)", "(3x)", "(4x)", "(5x)", "(6x)", "(7x)", "(8x)", "(9x)", "(10x)",
                          "||1x", "||2x", "||3x", "||4x", "||5x", "||6x", "||7x", "||8x", "||9x", "||10x"]
         for item in grayItems {
-            newText = newText.replacingOccurrences(of: item, with: "<span style=\"color: #999999;\">\(item)</span>")
+            newText = newText.replacingOccurrences(of: item, with: graySpan + item + spanEnd)
         }
         
         return newText
