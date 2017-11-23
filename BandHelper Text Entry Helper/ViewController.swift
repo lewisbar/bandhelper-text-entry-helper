@@ -10,6 +10,8 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    @IBOutlet var textView: NSTextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,6 +24,24 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBAction func copyAsHTML(_ sender: NSButton) {
+        guard let text = textView.textStorage?.string else { return }
+        let htmlText = text.bandHelperHTML
+        htmlText.writeToPasteBoard()
+    }
+}
 
+extension String {
+    var bandHelperHTML: String {
+        // TODO
+        
+        return self
+    }
+    
+    func writeToPasteBoard() {
+        let pasteBoard = NSPasteboard.general
+        pasteBoard.clearContents()
+        pasteBoard.writeObjects([self as NSString])
+    }
 }
 
