@@ -34,8 +34,14 @@ class ViewController: NSViewController {
 extension String {
     var bandHelperHTML: String {
         // TODO
+        var newText = self
         
-        return self
+        // Make numbers gray
+        for number in 1...10 {
+            newText = newText.replacingOccurrences(of: "\(number).", with: "<span style=\"color: #999999;\">\(number).</span>")
+        }
+        
+        return newText
     }
     
     func writeToPasteBoard() {
