@@ -37,8 +37,10 @@ extension String {
         var newText = self
         
         // Make numbers gray
-        for number in 1...10 {
+        for number in 1...9 {
             newText = newText.replacingOccurrences(of: "\(number).", with: "<span style=\"color: #999999;\">\(number).</span>")
+            newText = newText.replacingOccurrences(of: "\(number)x", with: "<span style=\"color: #999999;\">\(number)x</span>")
+            newText = newText.replacingOccurrences(of: "||\(number)", with: "<span style=\"color: #999999;\">||\(number)</span>")
         }
         
         return newText
