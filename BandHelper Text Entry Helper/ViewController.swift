@@ -68,7 +68,8 @@ extension String {
         // Explicit color signs
         newText = newText.replacingOccurrences(of: "€o", with: orangeSpan)
         newText = newText.replacingOccurrences(of: "€y", with: yellowSpan)
-        newText = newText.replacingOccurrences(of: "€g", with: greenSpan)
+        newText = newText.replacingOccurrences(of: "€gre", with: greenSpan)
+        newText = newText.replacingOccurrences(of: "€gra", with: graySpan)
         
         // Span ending
         newText = newText.replacingOccurrences(of: "::", with: spanEnd)
@@ -81,7 +82,8 @@ extension String {
         // Rehearsal marks
         newText = newText.replacingOccurrences(of: "(", with: graySpan + "(")
         newText = newText.replacingOccurrences(of: ")", with: ")" + spanEnd)
-        
+        newText = newText.replacingOccurrences(of: "-->", with: graySpan + "-->")
+
         // Same chords for multiple parts in the chord field
         newText = newText.replacingOccurrences(of: "/PC: ", with: "/" + orangeSpan + "PC" + spanEnd + ":")
         newText = newText.replacingOccurrences(of: "/PC1: ", with: "/" + orangeSpan + "PC1" + spanEnd + ":")
@@ -108,7 +110,7 @@ extension String {
         newText = newText.replacingOccurrences(of: "Co/", with: greenSpan + "Co" + spanEnd + "/")
             
         // Gray
-        let grayItems = ["Ve:", "Ch:", "Ch1:", "Ch2:", "Ch3:", "Br:", "Br1:", "Br2:", "PC:", "PC1:", "PC2:", "In:", "Co:",
+        let grayItems = ["Ve:", "Ch:", "Ch1:", "Ch2:", "Ch3:", "Br:", "Br1:", "Br2:", "PC:", "PC1:", "PC2:", "In:", "Co:", "Ou:", "En:",
                          "1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.",
                          "(1x)", "(2x)", "(3x)", "(4x)", "(5x)", "(6x)", "(7x)", "(8x)", "(9x)", "(10x)",
                          "||1x", "||2x", "||3x", "||4x", "||5x", "||6x", "||7x", "||8x", "||9x", "||10x"]
